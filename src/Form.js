@@ -63,10 +63,13 @@ function RegistrationView() {
 
     // email validation
     
-     if (!inputValues.email.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z])+\.)+([a-zA-Z]{2,4})+$/)) {
-      errors.email = "Please enter a valid email address*";
-    } else {
-      errors.email = " ";
+
+    if (!inputValues.email) {
+      errors.email = 'Email is Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(inputValues.email)) {
+      errors.email = 'Invalid email address entered'
+    }else{
+      errors.email =" "
     }
 
     //password validation
@@ -97,7 +100,7 @@ function RegistrationView() {
 
   useEffect(() => {
     checkValidation();
-  }, [inputValues]);
+  });
 
   
 
@@ -118,8 +121,8 @@ function RegistrationView() {
    
   
 
-  return (<>
-   <body>
+  return (
+      <div>
     <label className="pop"> Movies Hub</label>
     <div className="container">
     <h2>User Registration</h2>
@@ -225,17 +228,15 @@ function RegistrationView() {
             <textarea
               placeholder="  "
               type="string"
-              name="address"
-              className="input-field"
-              maxlength="400" 
+              maxLength="400" 
               id="uname"
               onKeyUp={myfun1}
               required
             />
-            <div className="d-block">
+            <div>
                  <span id="uname_span">0</span>/400
                      </div>
-                     <meter id="uname_meter"  max="400" min="0" value=""class="form-control" ></meter>
+                     <meter id="uname_meter"  maxLength="400" min="0" value=""className="form-control" ></meter>
             </div>
             <div>
             <label>Upload Image :</label>
@@ -244,14 +245,14 @@ function RegistrationView() {
           <button type="submit" id="submit-button"  onClick={(e) => handleChange(e)}>
             submit
           </button>
-          <div className="form-input-login">
+          <div>
             Already have an account? Login <a href=" ">here</a>
           </div>
         </form>
       </div>
     </div>
-  </body>
-    </>);
+    </div>
+    );
 }
 
 
